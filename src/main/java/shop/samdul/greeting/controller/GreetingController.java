@@ -14,19 +14,20 @@ public class GreetingController {
 
     @GetMapping("/greeting")
     public String greeting(
-        @RequestParam(name="name", required=false, defaultValue="HI") String name, 
-        Model model) {
-            People p = new People();
-            if (!nameStack.isEmpty()){
-                People pp = nameStack.peek()
-                p.setNum(pp.getNum() +1);
-            } else {
-                p.setNum(1);
-            {
-            p.setName(name.toLowerCase());
-            nameStack.push(p);
-            model.addAttribute("nameStack", nameStack);
-            return "greeting";
-    }
+    @RequestParam(name="name", required=false, defaultValue="HI") String name, Model model) {
 
+        People p = new People();
+
+        if (!nameStack.isEmpty()){
+            People pp = nameStack.peek();
+            p.setNum(pp.getNum() +1);
+        } else {
+            p.setNum(1);
+        }
+
+        p.setName(name.toLowerCase());
+        nameStack.push(p);
+        model.addAttribute("nameStack", nameStack);
+        return "greeting";
+    }
 }
